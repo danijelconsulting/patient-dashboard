@@ -10,14 +10,21 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   template: `
-    <div class="flex flex-col items-center p-5 bg-white rounded-md border border-[var(--border-color)] cursor-pointer hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 flex items-center justify-center mb-3 text-[var(--primary-color)]">
-        <mat-icon class="scale-150">{{icon}}</mat-icon>
+    <div class="flex flex-col items-center p-4 bg-white rounded-lg cursor-pointer">
+      <div class="w-12 h-12 mb-3 rounded-lg bg-[#F8F9FC] hover:bg-[#E8E9FC] flex items-center justify-center">
+        <mat-icon class="text-[#4A5578]">{{icon}}</mat-icon>
       </div>
-      <span class="text-sm font-medium text-[var(--text-primary)] text-center">{{label}}</span>
+      <span class="text-sm text-[#4A5578] text-center font-medium">{{label}}</span>
     </div>
   `,
-  styles: []
+  styles: [`
+    :host {
+      display: block;
+    }
+    .mat-icon {
+      transform: scale(1.2);
+    }
+  `]
 })
 export class GridCardComponent {
   @Input() icon!: string;

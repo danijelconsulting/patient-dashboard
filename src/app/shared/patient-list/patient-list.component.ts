@@ -16,10 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class PatientListComponent {
   patients = [
-    { name: 'Olavi Virtanen', id: '240545-123Y', department: 'HUS, Kardiologian osasto' },
-    { name: 'Juhana Korhonen', id: '011032-123Y', department: 'HUS, Kardiologian osasto' },
-    { name: 'Rikka Mäkelä', id: '150242-456K', department: 'HUS, Kardiologian osasto' },
-    { name: 'Mikko Nieminen', id: '300630-789P', department: 'HUS, Kardiologian osasto' },
-    { name: 'Aino Salminen', id: '011041-321N', department: 'HUS, Kardiologian osasto' }
+    { name: 'Oliver White', id: '240545-123Y', department: 'HUS, Cardiology Department' },
+    { name: 'John Cooper', id: '011032-123Y', department: 'HUS, Cardiology Department' },
+    { name: 'Rachel Miller', id: '150242-456K', department: 'HUS, Cardiology Department' },
+    { name: 'Michael Newman', id: '300630-789P', department: 'HUS, Cardiology Department' },
+    { name: 'Anna Sullivan', id: '011041-321N', department: 'HUS, Cardiology Department' }
   ];
 }

@@ -25,12 +25,12 @@ interface NavItem {
 })
 export class NavigationComponent {
   navItems: NavItem[] = [
-    { icon: 'description', label: 'Potilaan tarkastelu' },
-    { icon: 'people', label: 'Potilaan viestit', badge: 3 },
-    { icon: 'medical_services', label: 'Lääkärin viestit' },
-    { icon: 'schedule', label: 'Työajat', active: true },
-    { icon: 'calendar_today', label: 'Kalenteri' },
-    { icon: 'settings', label: 'Asetukset' },
-    { icon: 'health_and_safety', label: 'Terveysportti' }
+    { icon: 'description', label: 'Patient View' },
+    { icon: 'people', label: 'Patient Messages', badge: 3 },
+    { icon: 'medical_services', label: 'Doctor Messages' },
+    { icon: 'schedule', label: 'Work Hours', active: true },
+    { icon: 'calendar_today', label: 'Calendar' },
+    { icon: 'settings', label: 'Settings' },
+    { icon: 'health_and_safety', label: 'Health Portal' }
   ];
 } 

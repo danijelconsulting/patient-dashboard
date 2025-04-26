@@ -1,75 +1,178 @@
-<div>
-  <div class="flex justify-between items-center mb-4">
-    <h2 class="text-lg font-semibold text-[var(--text-primary)]">
-      New Patient Event: Thomas Kerola, HUS, Cardiology Department
-    </h2>
-    <button mat-icon-button (click)="close.emit()">
-      <mat-icon>close</mat-icon>
-    </button>
+<div class="p-6 overflow-y-auto max-h-[calc(80vh-3rem)]">
+  <!-- Header with doctor info -->
+  <div class="flex items-center justify-between text-sm text-gray-600 mb-6">
+    <div class="flex-1 min-w-0 pr-4">
+      <p class="truncate">Thomas Veikko Kerola, Helsinki Hospital, Cardiology Department</p>
+    </div>
+    <div class="flex items-center flex-shrink-0">
+      29/10/2024 14:49
+      <button class="ml-1 p-2 hover:bg-gray-100 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+        </svg>
+      </button>
+    </div>
   </div>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Patient's Full Name</mat-label>
-      <input matInput value="Thomas Kerola">
-    </mat-form-field>
-    
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Patient ID</mat-label>
-      <input matInput value="190687-123B">
-    </mat-form-field>
-  </div>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Event Type</mat-label>
-      <mat-select>
-        <mat-option value="remote">Remote Session</mat-option>
-        <mat-option value="call">Care Call</mat-option>
-        <mat-option value="visit">Office Visit</mat-option>
-        <mat-option value="consult">Consultation</mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Appointment Time</mat-label>
-      <input matInput [value]="currentDate">
-      <mat-icon matSuffix>calendar_today</mat-icon>
-    </mat-form-field>
-  </div>
-  
-  <mat-form-field appearance="outline" class="w-full mb-4">
-    <mat-label>Reason for Visit</mat-label>
-    <textarea matInput rows="3" placeholder="Reason for visit..."></textarea>
-    <mat-icon matSuffix>mic</mat-icon>
-  </mat-form-field>
-  
-  <div class="mb-4">
-    <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">Status</label>
-    <mat-radio-group class="flex space-x-4">
-      <mat-radio-button value="luonnos" checked>Draft</mat-radio-button>
-      <mat-radio-button value="valmis">Ready</mat-radio-button>
-      <mat-radio-button value="hyvaksytty">Approved</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  
-  <mat-form-field appearance="outline" class="w-full mb-4">
-    <mat-label>Doctor</mat-label>
-    <input matInput value="Thomas Kerola">
-  </mat-form-field>
-  
-  <mat-form-field appearance="outline" class="w-full mb-4">
-    <mat-label>Additional Notes</mat-label>
-    <textarea matInput rows="3" placeholder="Additional notes..."></textarea>
-    <mat-icon matSuffix>mic</mat-icon>
-  </mat-form-field>
-  
-  <div class="flex justify-end space-x-3 mt-6">
-    <button mat-button (click)="close.emit()" class="text-[var(--text-secondary)]">
-      Cancel
-    </button>
-    <button mat-raised-button color="primary" (click)="createEvent()" class="bg-[var(--accent-color)]">
-      Create Event
-    </button>
-  </div>
+
+  <!-- Form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Patient Full Name -->
+    <div class="space-y-1">
+      <label for="patientName" class="block text-sm font-medium text-gray-700">Patient Full Name</label>
+      <input
+        id="patientName"
+        type="text"
+        formControlName="patientName"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+      >
+    </div>
+
+    <!-- Date of Birth and Patient ID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-1">
+        <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+        <input
+          id="dateOfBirth"
+          type="text"
+          formControlName="dateOfBirth"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+        >
+      </div>
+      <div class="space-y-1">
+        <label for="patientId" class="block text-sm font-medium text-gray-700">Patient ID</label>
+        <input
+          id="patientId"
+          type="text"
+          formControlName="patientId"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+        >
+      </div>
+    </div>
+
+    <!-- Event Type -->
+    <div class="space-y-1">
+      <label for="eventType" class="block text-sm font-medium text-gray-700">Event Type</label>
+      <div class="relative">
+        <input
+          id="eventType"
+          type="text"
+          formControlName="eventType"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+        >
+        <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Visit Reason -->
+    <div class="space-y-1">
+      <label for="visitReason" class="block text-sm font-medium text-gray-700">Visit Reason</label>
+      <div class="relative">
+        <input
+          id="visitReason"
+          type="text"
+          formControlName="visitReason"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+        >
+        <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="space-y-2">
+      <label class="block text-sm font-medium text-gray-700">Status:</label>
+      <div class="flex gap-4">
+        <label class="inline-flex items-center">
+          <input type="radio" formControlName="status" value="luonnos" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+          <span class="ml-2 text-gray-700">Draft</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" formControlName="status" value="valmis" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+          <span class="ml-2 text-gray-700">Ready</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" formControlName="status" value="hyvaksytty" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+          <span class="ml-2 text-gray-700">Approved</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="border-gray-200">
+
+    <!-- Doctor and Date Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-1">
+        <label for="doctor" class="block text-sm font-medium text-gray-700">Doctor:</label>
+        <input
+          id="doctor"
+          type="text"
+          formControlName="doctor"
+          value="Tuomas Veikko Kerola"
+          readonly
+          class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md text-gray-500"
+        >
+      </div>
+      <div class="space-y-1">
+        <label for="receptionDate" class="block text-sm font-medium text-gray-700">Reception Date and Time:</label>
+        <div class="relative">
+          <input
+            id="receptionDate"
+            type="text"
+            formControlName="receptionDate"
+            [value]="'29/10/2024 14:49'"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md pr-10 bg-gray-50"
+            readonly
+          >
+          <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Information -->
+    <div class="space-y-1">
+      <label for="additionalInfo" class="block text-sm font-medium text-gray-700">Additional Information</label>
+      <div class="relative">
+        <textarea
+          id="additionalInfo"
+          formControlName="additionalInfo"
+          rows="4"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-none"
+        ></textarea>
+        <button type="button" class="absolute right-2 top-2 p-2 hover:bg-gray-100 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end gap-3">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      >
+        Create Event
+      </button>
+      <button
+        type="button"
+        (click)="onCancel()"
+        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      >
+        Close
+      </button>
+    </div>
+  </form>
 </div>

@@ -1,62 +1,205 @@
 <div class="flex flex-col min-h-screen bg-[var(--light-gray)]">
   <!-- Full-width header -->
   <app-header class="w-full"></app-header>
-  
-  <div class="container mx-auto px-4 py-2 flex-1 max-w-7xl">
-    <!-- Navigation bar -->
-    <app-navigation class="mb-4"></app-navigation>
-    
+
+  <!-- Main container with proper spacing -->
+  <div class="container mx-auto px-6 flex-1">
+    <!-- Navigation bar with proper margin -->
+    <app-navigation class="block my-6"></app-navigation>
+
     <!-- Main content grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
       <!-- Left column (2/3 width on desktop) -->
-      <div class="lg:col-span-2">
-        <div class="bg-white rounded-lg border border-[var(--border-color)] shadow-sm p-4 mb-6">
+      <div class="lg:col-span-2 flex-1">
+        <div
+          class="bg-white rounded-lg min-h-[100%] max-h-[650px] flex flex-col border border-[var(--border-color)] shadow-sm p-4"
+        >
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center">
-              <h1 class="text-xl font-semibold text-[var(--text-primary)]">Työlista</h1>
-              <div class="ml-2 px-3 py-1 bg-[var(--secondary-color)] rounded-full text-xs font-medium text-[var(--text-secondary)]">Kalenteri</div>
+              <h1 class="text-xl font-semibold text-[var(--text-primary)]">
+                Work List
+              </h1>
+              <div
+                class="ml-2 px-3 py-1 bg-[var(--secondary-color)] rounded-full text-xs font-medium text-[var(--text-secondary)]"
+              >
+                Calendar
+              </div>
             </div>
-            
-            <button mat-raised-button color="primary" (click)="openPatientForm()" class="bg-[var(--accent-color)]">
-              <mat-icon class="mr-1">add</mat-icon> Uusi potilastapahtuma
+          </div>
+
+          <div class="flex mb-4 border-b border-[var(--border-color)]">
+            <button
+              class="px-4 py-2 text-sm font-medium border-b-2 transition-colors"
+              [ngClass]="
+                activeTab === 'previous'
+                  ? 'border-[var(--accent-color)] text-[var(--accent-color)] bg-white'
+                  : 'border-transparent text-[var(--text-secondary)] bg-transparent'
+              "
+              (click)="activeTab = 'previous'"
+            >
+              Previous List
+            </button>
+            <button
+              class="px-4 py-2 text-sm font-medium border-b-2 transition-colors"
+              [ngClass]="
+                activeTab === 'tomorrow'
+                  ? 'border-[var(--accent-color)] text-[var(--accent-color)] bg-white'
+                  : 'border-transparent text-[var(--text-secondary)] bg-transparent'
+              "
+              (click)="activeTab = 'tomorrow'"
+            >
+              Tomorrow's List
             </button>
           </div>
-          
-          <div class="flex mb-4 border-b border-[var(--border-color)]">
-            <button class="px-4 py-2 text-sm font-medium border-b-2 border-[var(--accent-color)] text-[var(--accent-color)]">Edellinen lista</button>
-            <button class="px-4 py-2 text-sm font-medium text-[var(--text-secondary)]">Huomisen lista</button>
+          <div class="flex-1 overflow-y-auto">
+            <app-appointment-card
+              *ngFor="let appointment of appointments"
+              [appointment]="appointment"
+            ></app-appointment-card>
           </div>
-          
-          <app-appointment-card *ngFor="let appointment of appointments" [appointment]="appointment"></app-appointment-card>
+          <!-- Notes section INSIDE worklist card -->
+          <hr class="mb-2 border-gray-200" />
+          <div class="mt-2">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-medium text-[var(--text-primary)]">
+                Notes
+              </h2>
+              <div class="flex gap-2">
+                <!-- Download button -->
+                <button class="p-2 rounded hover:bg-gray-100" title="Download">
+                  <svg
+                    class="w-5 h-5 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"
+                    />
+                  </svg>
+                </button>
+                <!-- Trash button -->
+                <button class="p-2 rounded hover:bg-gray-100" title="Delete">
+                  <svg
+                    class="w-5 h-5 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <!-- Add Note Card -->
+              <button
+                class="flex flex-col items-center justify-center w-20 h-20 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50"
+              >
+                <svg
+                  class="w-6 h-6 text-gray-400 mb-1"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                <span class="text-xs text-gray-500">Add Note</span>
+              </button>
+              <!-- Example Note Card -->
+              <div
+                class="flex flex-col items-center justify-center w-20 h-20 bg-gray-100 rounded-lg"
+              >
+                <span class="text-xs text-gray-600">Doctor's Note</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <!-- Right column (1/3 width on desktop) -->
-      <div class="lg:col-span-1">
+      <div class="lg:col-span-1 flex flex-col">
         <!-- Grid cards section -->
-        <div class="bg-white rounded-lg border border-[var(--border-color)] shadow-sm p-4 mb-6">
-          <div class="grid grid-cols-2 gap-4">
-            <app-grid-card icon="description" label="Sairaalahakde"></app-grid-card>
-            <app-grid-card icon="science" label="Laboratoriotulos"></app-grid-card>
-            <app-grid-card icon="event_note" label="Todistukset"></app-grid-card>
-            <app-grid-card icon="medication" label="Resepti"></app-grid-card>
-            <app-grid-card icon="image" label="Kuvantaminen"></app-grid-card>
-            <app-grid-card icon="list_alt" label="Lähettelista"></app-grid-card>
+        <div
+          class="bg-white rounded-lg border border-[var(--border-color)] shadow-sm p-4 mb-6"
+        >
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+            <app-grid-card
+              *ngFor="let item of gridItems"
+              [icon]="item.icon"
+              [label]="item.label"
+            >
+            </app-grid-card>
+            <!-- Add Patient Form Button -->
+            <div class="cursor-pointer" (click)="openPatientForm()">
+              <div
+                class="flex flex-col items-center justify-center p-4 bg-white"
+              >
+                <div
+                  class="w-12 h-12 mb-3 rounded-lg bg-[#F8F9FC] hover:bg-[#E8E9FC] flex items-center justify-center"
+                >
+                  <mat-icon class="text-[#4A5578] w-6 h-6">add</mat-icon>
+                </div>
+                <span></span>
+              </div>
+            </div>
           </div>
         </div>
-        
+
         <!-- Recent patients section -->
-        <div class="bg-white rounded-lg border border-[var(--border-color)] shadow-sm p-4">
-          <h2 class="text-base font-medium mb-3 text-[var(--text-primary)]">Viimeisimmät potilaat</h2>
-          
-          <div class="relative mb-3">
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-icon matPrefix class="text-[var(--text-secondary)] mr-2">search</mat-icon>
-              <input matInput placeholder="Etsi potilaan nimi tai henkilötunnus..." [(ngModel)]="searchTerm">
-            </mat-form-field>
+        <div
+          class="bg-white rounded-lg flex-1 border border-[var(--border-color)] shadow-sm p-4"
+        >
+          <div class="min-h-[100%] max-h-[300px] flex flex-col">
+            <h2 class="text-base font-medium mb-3 text-[var(--text-primary)]">
+              Recent Patients
+            </h2>
+
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="Search patient..."
+                class="w-full pl-4 pr-10 py-2 rounded-md border border-gray-300 focus:ring-0 text-sm bg-white placeholder-gray-400"
+              />
+              <span
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="flex-1 overflow-y-auto">
+              <app-patient-info
+                *ngFor="let patient of filteredPatients"
+                [patient]="patient"
+              ></app-patient-info>
+            </div>
           </div>
-          
-          <app-patient-info *ngFor="let patient of filteredPatients" [patient]="patient"></app-patient-info>
         </div>
       </div>
     </div>
@@ -64,8 +207,13 @@
 </div>
 
 <!-- Patient Form Dialog -->
-<div *ngIf="showPatientForm()" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-lg w-full max-w-lg">
+<div
+  *ngIf="showPatientForm()"
+  class="fixed inset-0 bg-black/50 flex items-start md:items-center justify-center z-50 px-4 py-[10vh] overflow-y-auto"
+>
+  <div
+    class="bg-white rounded-lg w-full max-w-2xl max-h-[80vh] my-auto overflow-y-auto"
+  >
     <app-patient-form (close)="closePatientForm()"></app-patient-form>
   </div>
-</div> 
+</div>

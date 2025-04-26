@@ -1,46 +1,59 @@
 <header class="bg-white shadow-sm w-full px-6 py-4">
-  <div class="container mx-auto flex justify-between items-center">
-    <!-- Search bar -->
-    <div class="flex-1 max-w-lg relative">
-      <mat-form-field appearance="outline" class="w-full">
-        <input matInput placeholder="Search system...">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+  <div class="relative mx-auto flex items-center justify-start md:justify-center">
+    
+    <div class="flex-1 max-w-[200px] sm:max-w-[300px] md:max-w-md lg:max-w-lg">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search system..."
+          class="w-full pl-4 pr-10 py-2 rounded-md border border-gray-300 focus:ring-0   text-sm bg-white placeholder-gray-400"
+        />
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+          </svg>
+        </span>
+      </div>
     </div>
     
-    <!-- Right side actions -->
-    <div class="flex items-center space-x-3">
+    <!-- Right section - Notifications and Profile -->
+    <div class="absolute right-4 flex items-center gap-0">
       <!-- Notifications -->
-      <button mat-icon-button class="relative">
+      <button mat-icon-button class="relative !leading-[24px]">
         <mat-icon class="text-gray-500">notifications_none</mat-icon>
       </button>
       
       <!-- User profile dropdown -->
-      <div class="relative ml-2">
-        <button mat-button [matMenuTriggerFor]="userMenu" class="flex items-center py-1">
-          <div class="h-9 w-9 rounded-full bg-gray-200 flex items-center justify-center mr-2">
-            <mat-icon class="text-gray-500">person</mat-icon>
+      <div class="relative">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="flex !bg-[#f5f5f5] items-center !px-0 !rounded-[24px]">
+          <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+            <mat-icon class="text-gray-500 scale-75">person</mat-icon>
           </div>
-          <div class="text-left">
-            <div class="font-medium text-sm">Kerola Tuomas Veikko</div>
-            <div class="text-xs text-gray-500">Erikoislääkäri</div>
-          </div>
-          <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
+          <mat-icon class="text-gray-400 ml-1">expand_more</mat-icon>
         </button>
         
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item class="flex items-center">
-            <mat-icon class="mr-2">settings</mat-icon>
-            <span>Settings</span>
-          </button>
-          <button mat-menu-item class="flex items-center">
-            <mat-icon class="mr-2">supervisor_account</mat-icon>
-            <span>Admin Panel</span>
-          </button>
-          <button mat-menu-item class="flex items-center">
-            <mat-icon class="mr-2">logout</mat-icon>
-            <span>Logout</span>
-          </button>
+        <mat-menu #userMenu="matMenu" class="min-w-[200px]">
+          <div class="px-4 py-3">
+            <div class="text-sm font-medium">Tuomas Veikko Kerola</div>
+            <div class="text-xs text-gray-500">Specialist Doctor</div>
+            <div class="text-xs text-gray-400 mt-1">Patient ID: P0007</div>
+          </div>
+          <div class="px-2">
+            <button mat-menu-item class="flex items-center w-full">
+              <mat-icon class="mr-2">settings</mat-icon>
+              <span>Settings</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item class="flex items-center w-full">
+              <mat-icon class="mr-2">admin_panel_settings</mat-icon>
+              <span>Open Admin Panel</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item class="flex items-center w-full">
+              <mat-icon class="mr-2">logout</mat-icon>
+              <span>Sign Out</span>
+            </button>
+          </div>
         </mat-menu>
       </div>
     </div>

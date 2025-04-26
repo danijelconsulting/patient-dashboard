@@ -42,23 +42,45 @@ interface GridItem {
 export class DashboardComponent {
   showPatientForm = signal(false);
   searchTerm = '';
+  activeTab: 'previous' | 'tomorrow' = 'previous';
 
-  appointments: Appointment[] = [
-    { time: '09:00 AM', name: 'Juha Lahtinen', id: '240545-123Y', status: 'Etävastaanotto', note: 'Hei tohtori, kiitos, että hyväksytte tapaamisen. Tarvitsen apua uusien oireiden kanssa, joita aloin kokea viime viikolla.' },
-    { time: '09:45 AM', name: 'Kaarina Mäkinen', id: '210637-963A', status: 'Etävastaanotto' },
-    { time: '10:30 AM', name: 'Antti Virtanen', id: '060526-741B', status: 'Vastaanotto' },
-    { time: '11:15 AM', name: 'Mari Hiltunen', id: '060526-741B', status: 'Hoitopuhelu' },
-    { time: '01:00 PM', name: 'Petri Niemi', id: '060526-741B', status: 'Konsultaatio' },
-    { time: '02:15 PM', name: 'Laura Leppänen', id: '151139-258D', status: 'Etävastaanotto' }
+  gridItems: GridItem[] = [
+    { icon: 'description', label: 'Hospital Record' },
+    { icon: 'science', label: 'Lab Results' },
+    { icon: 'fact_check', label: 'Certificates' },
+    { icon: 'medication', label: 'Prescription' },
+    { icon: 'image', label: 'Imaging' },
+    { icon: 'list_alt', label: 'Referral List' }
   ];
+
+  previousAppointments: Appointment[] = [
+    { time: '09:00 AM', name: 'John Smith', id: '240545-123Y', status: 'Remote Session', note: 'Hi doctor, thank you for accepting the appointment. I need help with new symptoms that I started experiencing last week.' },
+    { time: '09:45 AM', name: 'Kaarina Mäkinen', id: '210637-963A', status: 'Remote Session' },
+    { time: '10:30 AM', name: 'Antti Virtanen', id: '060526-741B', status: 'Office Visit' },
+    { time: '11:15 AM', name: 'Mari Hiltunen', id: '060526-741B', status: 'Care Call' },
+    { time: '01:00 PM', name: 'Petri Niemi', id: '060526-741B', status: 'Consultation' },
+    { time: '02:15 PM', name: 'Laura Leppänen', id: '151139-258D', status: 'Remote Session' }
+  ];
+
+  tomorrowAppointments: Appointment[] = [
+    { time: '09:00 AM', name: 'Anna Laine', id: '240545-123Y', status: 'Remote Session' },
+    { time: '09:45 AM', name: 'Mikko Koskinen', id: '210637-963A', status: 'Remote Session' },
+    { time: '10:30 AM', name: 'Sari Virtanen', id: '060526-741B', status: 'Office Visit' },
+    { time: '11:15 AM', name: 'Jari Hiltunen', id: '060526-741B', status: 'Care Call' },
+  ];
+
+  get appointments(): Appointment[] {
+    return this.activeTab === 'previous' ? this.previousAppointments : this.tomorrowAppointments;
+  }
 
   patients: Patient[] = [
-    { name: 'Olavi Virtanen', id: '240545-123Y' },
-    { name: 'Juhani Korhonen', id: '010132-123Y' },
-    { name: 'Riikka Mäkelä', id: '150342-456K' },
-    { name: 'Mikko Nieminen', id: '300530-789P' },
-    { name: 'Aino Salminen', id: '010141-321N' }
+    { name: 'Oliver Wilson', id: '240545-123Y' },
+    { name: 'John Cooper', id: '010132-123Y' },
+    { name: 'Rachel Mitchell', id: '150342-456K' },
+    { name: 'Michael Newman', id: '300530-789P' },
+    { name: 'Anna Sullivan', id: '010141-321N' }
   ];
+
 
   get filteredPatients(): Patient[] {
     if (!this.searchTerm) {
@@ -74,9 +96,11 @@ export class DashboardComponent {
 
   openPatientForm() {
     this.showPatientForm.set(true);
+    document.body.style.overflow = 'hidden';
   }
 
   closePatientForm() {
     this.showPatientForm.set(false);
+    document.body.style.overflow = '';
   }
 }
