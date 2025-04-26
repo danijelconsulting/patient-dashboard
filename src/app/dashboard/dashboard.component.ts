@@ -55,18 +55,18 @@ export class DashboardComponent {
 
   previousAppointments: Appointment[] = [
     { time: '09:00 AM', name: 'John Smith', id: '240545-123Y', status: 'Remote Session', note: 'Hi doctor, thank you for accepting the appointment. I need help with new symptoms that I started experiencing last week.' },
-    { time: '09:45 AM', name: 'Kaarina Mäkinen', id: '210637-963A', status: 'Remote Session' },
-    { time: '10:30 AM', name: 'Antti Virtanen', id: '060526-741B', status: 'Office Visit' },
-    { time: '11:15 AM', name: 'Mari Hiltunen', id: '060526-741B', status: 'Care Call' },
-    { time: '01:00 PM', name: 'Petri Niemi', id: '060526-741B', status: 'Consultation' },
-    { time: '02:15 PM', name: 'Laura Leppänen', id: '151139-258D', status: 'Remote Session' }
+    { time: '09:45 AM', name: 'Kaarina Mäkinen', id: '210637-963A', status: 'Remote Session', note: 'Following up on previous treatment plan and medication adjustments.' },
+    { time: '10:30 AM', name: 'Antti Virtanen', id: '060526-741B', status: 'Office Visit', note: 'Regular check-up and review of recent lab results.' },
+    { time: '11:15 AM', name: 'Mari Hiltunen', id: '060526-741B', status: 'Care Call', note: 'Discussion about ongoing treatment progress and any concerns.' },
+    { time: '01:00 PM', name: 'Petri Niemi', id: '060526-741B', status: 'Consultation', note: 'Specialist consultation regarding recent diagnosis.' },
+    { time: '02:15 PM', name: 'Laura Leppänen', id: '151139-258D', status: 'Remote Session', note: 'Follow-up on medication side effects and treatment effectiveness.' }
   ];
 
   tomorrowAppointments: Appointment[] = [
-    { time: '09:00 AM', name: 'Anna Laine', id: '240545-123Y', status: 'Remote Session' },
-    { time: '09:45 AM', name: 'Mikko Koskinen', id: '210637-963A', status: 'Remote Session' },
-    { time: '10:30 AM', name: 'Sari Virtanen', id: '060526-741B', status: 'Office Visit' },
-    { time: '11:15 AM', name: 'Jari Hiltunen', id: '060526-741B', status: 'Care Call' },
+    { time: '09:00 AM', name: 'Anna Laine', id: '240545-123Y', status: 'Remote Session', note: 'Initial consultation to discuss new symptoms.' },
+    { time: '09:45 AM', name: 'Mikko Koskinen', id: '210637-963A', status: 'Remote Session', note: 'Review of recent test results and treatment plan.' },
+    { time: '10:30 AM', name: 'Sari Virtanen', id: '060526-741B', status: 'Office Visit', note: 'Annual check-up and preventive care discussion.' },
+    { time: '11:15 AM', name: 'Jari Hiltunen', id: '060526-741B', status: 'Care Call', note: 'Brief follow-up on medication adjustment.' },
   ];
 
   get appointments(): Appointment[] {
