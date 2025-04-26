@@ -1,0 +1,75 @@
+<div>
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-semibold text-[var(--text-primary)]">
+      New Patient Event: Thomas Kerola, HUS, Cardiology Department
+    </h2>
+    <button mat-icon-button (click)="close.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Patient's Full Name</mat-label>
+      <input matInput value="Thomas Kerola">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Patient ID</mat-label>
+      <input matInput value="190687-123B">
+    </mat-form-field>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Event Type</mat-label>
+      <mat-select>
+        <mat-option value="remote">Remote Session</mat-option>
+        <mat-option value="call">Care Call</mat-option>
+        <mat-option value="visit">Office Visit</mat-option>
+        <mat-option value="consult">Consultation</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Appointment Time</mat-label>
+      <input matInput [value]="currentDate">
+      <mat-icon matSuffix>calendar_today</mat-icon>
+    </mat-form-field>
+  </div>
+  
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>Reason for Visit</mat-label>
+    <textarea matInput rows="3" placeholder="Reason for visit..."></textarea>
+    <mat-icon matSuffix>mic</mat-icon>
+  </mat-form-field>
+  
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">Status</label>
+    <mat-radio-group class="flex space-x-4">
+      <mat-radio-button value="luonnos" checked>Draft</mat-radio-button>
+      <mat-radio-button value="valmis">Ready</mat-radio-button>
+      <mat-radio-button value="hyvaksytty">Approved</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>Doctor</mat-label>
+    <input matInput value="Thomas Kerola">
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>Additional Notes</mat-label>
+    <textarea matInput rows="3" placeholder="Additional notes..."></textarea>
+    <mat-icon matSuffix>mic</mat-icon>
+  </mat-form-field>
+  
+  <div class="flex justify-end space-x-3 mt-6">
+    <button mat-button (click)="close.emit()" class="text-[var(--text-secondary)]">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="createEvent()" class="bg-[var(--accent-color)]">
+      Create Event
+    </button>
+  </div>
+</div>

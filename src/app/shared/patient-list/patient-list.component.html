@@ -1,0 +1,14 @@
+<div class="space-y-2">
+  <div *ngFor="let patient of patients" class="flex justify-between items-center p-2 bg-white rounded shadow-sm">
+    <div>
+      <p class="text-sm font-medium">{{ patient.name }} - {{ patient.id }}</p>
+      <p class="text-xs text-gray-600">{{ patient.department }}</p>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button mat-raised-button color="primary" class="text-xs">
+        Avaa etävastaanotto
+      </button>
+      <mat-icon>more_vert</mat-icon>
+    </div>
+  </div>
+</div>

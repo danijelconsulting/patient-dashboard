@@ -1,0 +1,7 @@
+<div style="position: fixed; bottom: 0; right: 0; padding: 10px; background: rgba(0,0,0,0.8); color: white; z-index: 9999; font-family: monospace; max-width: 400px; max-height: 200px; overflow: auto;">
+  <div *ngIf="componentLoaded">Debug: Dashboard Components Loaded</div>
+  <div *ngIf="errors.length">
+    <div>Errors:</div>
+    <div *ngFor="let error of errors" style="color: red; margin-top: 5px;">{{error}}</div>
+  </div>
+</div> 

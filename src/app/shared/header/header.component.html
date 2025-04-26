@@ -1,0 +1,48 @@
+<header class="bg-white shadow-sm w-full px-6 py-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Search bar -->
+    <div class="flex-1 max-w-lg relative">
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Search system...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    
+    <!-- Right side actions -->
+    <div class="flex items-center space-x-3">
+      <!-- Notifications -->
+      <button mat-icon-button class="relative">
+        <mat-icon class="text-gray-500">notifications_none</mat-icon>
+      </button>
+      
+      <!-- User profile dropdown -->
+      <div class="relative ml-2">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="flex items-center py-1">
+          <div class="h-9 w-9 rounded-full bg-gray-200 flex items-center justify-center mr-2">
+            <mat-icon class="text-gray-500">person</mat-icon>
+          </div>
+          <div class="text-left">
+            <div class="font-medium text-sm">Kerola Tuomas Veikko</div>
+            <div class="text-xs text-gray-500">Erikoislääkäri</div>
+          </div>
+          <mat-icon class="ml-2">keyboard_arrow_down</mat-icon>
+        </button>
+        
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item class="flex items-center">
+            <mat-icon class="mr-2">settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item class="flex items-center">
+            <mat-icon class="mr-2">supervisor_account</mat-icon>
+            <span>Admin Panel</span>
+          </button>
+          <button mat-menu-item class="flex items-center">
+            <mat-icon class="mr-2">logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</header> 

@@ -1,0 +1,5 @@
+:host ::ng-deep .mat-badge-content {
+  background-color: var(--accent-color) !important;
+  top: -4px !important;
+  right: -4px !important;
+} 
